@@ -3,6 +3,7 @@ using Bogus;
 
 namespace Vavatech.Shop.FakeServices
 {
+
     public class CustomerFaker : Faker<Customer>
     {
         public CustomerFaker()
@@ -11,7 +12,7 @@ namespace Vavatech.Shop.FakeServices
             RuleFor(p => p.FirstName, f => f.Person.FirstName);
             RuleFor(p => p.LastName, f => f.Person.LastName);
             RuleFor(p => p.Email, (f, c) => $"{c.FirstName}.{c.LastName}@vavatech.pl");
-
+            RuleFor(p => p.Photo, f => f.Person.Avatar);
             RuleFor(p => p.IsRemoved, f => f.Random.Bool(0.2f));
         }
     }

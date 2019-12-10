@@ -15,13 +15,43 @@
 
     <Grid>
 
-        <ListBox ItemsSource="{Binding Path=Customers}"
-                 DisplayMemberPath="FullName"
-                 >
-         
-        </ListBox>
+        <Grid>
 
-      
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <ListBox
+                ItemsSource="{Binding Path=Customers}"
+                SelectedItem="{Binding SelectedCustomer}"
+                ItemTemplate="{StaticResource CustomerTemplate}" />
+
+            <StackPanel Grid.Column="1">
+                <Label>First name</Label>
+                <TextBox Text="{Binding SelectedCustomer.FirstName}" />
+
+                <Label>Last name</Label>
+                <TextBox Text="{Binding SelectedCustomer.LastName, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Label>Email</Label>
+                <TextBox Text="{Binding SelectedCustomer.Email}" />
+
+                <Label>Full name</Label>
+                <TextBox IsReadOnly="True" 
+                         
+                         Text="{Binding SelectedCustomer.FullName, Mode=OneWay}" />
+
+                
+                <CheckBox IsChecked="{Binding SelectedCustomer.IsRemoved}" />
+
+                <Button Command="{Binding SendCommand}">Send</Button>
+            </StackPanel>
         
+        </Grid>
+
+
+
+
     </Grid>
 </Page>

@@ -65,6 +65,9 @@
     <Compile Include="Views\CustomersView.xaml.cs">
       <DependentUpon>CustomersView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductsView.xaml.cs">
+      <DependentUpon>ProductsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -97,13 +100,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vavatech.Shop.Models\Vavatech.Shop.Models.csproj">
+      <Project>{be496c54-7117-402f-a58a-b35dc75f7800}</Project>
+      <Name>Vavatech.Shop.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vavatech.Shop.ViewModels\Vavatech.Shop.ViewModels.csproj">
       <Project>{cbaa4bea-cf67-4e36-b211-132067923df2}</Project>
       <Name>Vavatech.Shop.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,6 +6,14 @@
         xmlns:local="clr-namespace:Vavatech.Shop.WpfClient.Views"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
+
+    <Window.Resources>
+
+     
+
+    </Window.Resources>
+    
+    
     <Grid>
 
       
@@ -53,9 +61,10 @@
 
         <DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Button Width="200" Background="Blue">Customers</Button>
-                <Button Width="200" Background="Green">Products</Button>
-                <Button Width="100" Background="Red" HorizontalAlignment="Right">Logo</Button>
+                <Button>Customers</Button>
+                <Button Style="{StaticResource MySpecialButtonStyle}" >Products</Button>
+                <Button>Employees</Button>
+                <Button HorizontalAlignment="Right">Logo</Button>
             </DockPanel>
 
             <Frame Source="CustomersView.xaml" />
