@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vavatech.Shop.WpfClient.Views"
+        xmlns:vm="clr-namespace:Vavatech.Shop.ViewModels;assembly=Vavatech.Shop.ViewModels"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ShellViewModel}"
+        
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
+
+    <!--<Window.DataContext>
+        <vm:ShellViewModel />
+    </Window.DataContext>-->
 
     <Window.Resources>
 
@@ -61,13 +68,18 @@
 
         <DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Button>Customers</Button>
-                <Button Style="{StaticResource MySpecialButtonStyle}" >Products</Button>
+                <Button Command="{Binding ShowViewCommand}" 
+                        CommandParameter="Customers">Customers</Button>
+                <Button Command="{Binding ShowViewCommand}"
+                        CommandParameter="Products"
+                        Style="{StaticResource MySpecialButtonStyle}" >Products</Button>
                 <Button>Employees</Button>
                 <Button HorizontalAlignment="Right">Logo</Button>
             </DockPanel>
 
-            <Frame Source="CustomersView.xaml" />
+            <Frame Name="ContentFrame" 
+                   NavigationUIVisibility="Hidden"
+                   Source="CustomersView.xaml" />
         </DockPanel>
 
     </Grid>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 using System.Linq;
+using Bogus;
 
 namespace Vavatech.Shop.FakeServices
 {
@@ -11,8 +12,8 @@ namespace Vavatech.Shop.FakeServices
     {
         private IEnumerable<Customer> customers;
 
-        // Install-Package Bogus
-        public FakeCustomerService(CustomerFaker customerFaker)
+        // Install-Package Bogus    
+        public FakeCustomerService(Faker<Customer> customerFaker)
         {
             customers = customerFaker.Generate(100);
         }

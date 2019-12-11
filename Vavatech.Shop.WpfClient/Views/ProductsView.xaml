@@ -5,18 +5,37 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Vavatech.Shop.WpfClient.Views"
       xmlns:vm="clr-namespace:Vavatech.Shop.ViewModels;assembly=Vavatech.Shop.ViewModels"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:b="clr-namespace:Vavatech.Shop.WpfClient.Behaviors"
+      DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductsViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductsView">
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <vm:ProductsViewModel />
-    </Page.DataContext>
+    </Page.DataContext>-->
     
     <Grid>
 
-        <ListBox ItemsSource="{Binding Products}"
-                 DisplayMemberPath="Name" />
+        <DockPanel>
+            <Button DockPanel.Dock="Bottom"
+                    Command="{Binding ShowSelectedProductCommand}"
+                    >Show product</Button>
+
+            <ListBox ItemsSource="{Binding Products}"
+                 SelectedItem="{Binding SelectedProduct}"
+                 ItemTemplate="{StaticResource ProductTemplate}"
+                  >
+
+                <i:Interaction.Behaviors>
+                    <b:ListBoxBehavior 
+                        Command="{Binding ShowSelectedProductCommand}"  />
+                </i:Interaction.Behaviors>
+
+            </ListBox>
+
+        </DockPanel>
 
 
     </Grid>

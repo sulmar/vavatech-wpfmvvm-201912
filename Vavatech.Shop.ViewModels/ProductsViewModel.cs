@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Vavatech.Shop.FakeServices;
+using System.Windows.Input;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 
@@ -9,17 +9,21 @@ namespace Vavatech.Shop.ViewModels
     {
         public IEnumerable<Product> Products { get; set; }
 
+        public Product SelectedProduct { get; set; }
+
+        public ICommand ShowSelectedProductCommand { get; private set; }
+
         private readonly IProductService productService;
+        private readonly INavigationService navigationService;
 
-        public ProductsViewModel()
-            : this(new FakeProductService(new ProductFaker()))
-        {
-
-        }
-
-        public ProductsViewModel(IProductService productService)
+        public ProductsViewModel(
+            IProductService productService,
+            INavigationService navigationService)
         {
             this.productService = productService;
+            this.navigationService = navigationService;
+
+            ShowSelectedProductCommand = new RelayCommand(ShowSelectedProduct);
 
             Load();
         }
@@ -27,6 +31,16 @@ namespace Vavatech.Shop.ViewModels
         private void Load()
         {
             Products = productService.Get();
+        }
+
+
+        private void ShowSelectedProduct()
+        {
+            ShowProduct(SelectedProduct);
+        }
+        private void ShowProduct(Product product)
+        {
+            navigationService.Navigate("Product", product);   
         }
     }
 }

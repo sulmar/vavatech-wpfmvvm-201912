@@ -8,6 +8,8 @@ namespace Vavatech.Shop.Models
         public string FirstName { get; set; }
 
         private string _LastName;
+        private string email;
+
         public string LastName
         {
             get
@@ -30,7 +32,14 @@ namespace Vavatech.Shop.Models
         }
 
         public string Photo { get; set; }
-        public string Email { get; set; }
+        public string Email
+        {
+            get => email; set
+            {
+                email = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsRemoved { get; set; }
     }
 }

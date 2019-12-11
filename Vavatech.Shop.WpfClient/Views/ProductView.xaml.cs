@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace Vavatech.Shop.WpfClient.Views
 {
     /// <summary>
-    /// Interaction logic for ShellView.xaml
+    /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class ShellView : Window
+    public partial class ProductView : Page
     {
-        public ShellView()
+        public ProductView()
         {
             InitializeComponent();
-
         }
     }
 }

@@ -5,13 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Vavatech.Shop.WpfClient.Views"
       xmlns:vm="clr-namespace:Vavatech.Shop.ViewModels;assembly=Vavatech.Shop.ViewModels"
+      DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=CustomersViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomersView">
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <vm:CustomersViewModel />
-    </Page.DataContext>
+    </Page.DataContext>-->
 
     <Grid>
 
@@ -35,7 +36,7 @@
                 <TextBox Text="{Binding SelectedCustomer.LastName, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Email</Label>
-                <TextBox Text="{Binding SelectedCustomer.Email}" />
+                <TextBox Text="{Binding SelectedCustomer.Email, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Label>Full name</Label>
                 <TextBox IsReadOnly="True" 

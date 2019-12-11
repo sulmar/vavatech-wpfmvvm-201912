@@ -13,4 +13,14 @@
             <TextBlock Text="{Binding Email}" />
         </StackPanel>
     </DataTemplate>
+
+    <DataTemplate x:Key="ProductTemplate" DataType="{x:Type m:Product}">
+        <StackPanel Orientation="Horizontal">
+
+            <Ellipse Width="30" Height="30" Fill="{Binding Color}" Stroke="Black" StrokeThickness="1" />
+            <TextBlock VerticalAlignment="Center" Width="200" Text="{Binding Name}" />
+            <TextBlock VerticalAlignment="Center" Text="{Binding UnitPrice}" />
+        </StackPanel>
+    </DataTemplate>
+    
 </ResourceDictionary>
