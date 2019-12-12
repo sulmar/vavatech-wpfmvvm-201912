@@ -7,10 +7,15 @@
       xmlns:vm="clr-namespace:Vavatech.Shop.ViewModels;assembly=Vavatech.Shop.ViewModels"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:b="clr-namespace:Vavatech.Shop.WpfClient.Behaviors"
+      xmlns:c="clr-namespace:Vavatech.Shop.WpfClient.Converters"
       DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ProductsViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductsView">
+
+    <Page.Resources>
+        <c:BoolToVisibilityConverter x:Key="MyConverter" />
+    </Page.Resources>
 
     <!--<Page.DataContext>
         <vm:ProductsViewModel />
@@ -19,19 +24,37 @@
     <Grid>
 
         <DockPanel>
+
+            <StackPanel
+                DockPanel.Dock="Top">
+                <TextBox Text="{Binding Criteria.Name, UpdateSourceTrigger=PropertyChanged, Delay=1000}" />
+                <TextBox Text="{Binding Criteria.FromUnitPrice, TargetNullValue='', UpdateSourceTrigger=PropertyChanged, Delay=1000}" />
+                <TextBox Text="{Binding Criteria.ToUnitPrice, TargetNullValue='', UpdateSourceTrigger=PropertyChanged, Delay=1000}" />
+                <Button 
+                    Visibility="{Binding Criteria.IsValid, Converter={StaticResource MyConverter}}"
+                    Command="{Binding SearchCommand}">Search</Button>
+            </StackPanel>
+            
             <Button DockPanel.Dock="Bottom"
+
                     Command="{Binding ShowSelectedProductCommand}"
                     >Show product</Button>
 
             <ListBox ItemsSource="{Binding Products}"
                  SelectedItem="{Binding SelectedProduct}"
-                 ItemTemplate="{StaticResource ProductTemplate}"
-                  >
+                 ItemTemplate="{StaticResource ProductTemplate}" >
 
-                <i:Interaction.Behaviors>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction 
+                            Command="{Binding ShowSelectedProductCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <!--<i:Interaction.Behaviors>
                     <b:ListBoxBehavior 
                         Command="{Binding ShowSelectedProductCommand}"  />
-                </i:Interaction.Behaviors>
+                </i:Interaction.Behaviors>-->
 
             </ListBox>
 

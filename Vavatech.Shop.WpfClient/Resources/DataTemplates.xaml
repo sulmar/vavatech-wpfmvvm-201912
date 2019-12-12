@@ -14,12 +14,40 @@
         </StackPanel>
     </DataTemplate>
 
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="Blue" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding UnitPriceLevel}" 
+                         Value="{x:Static m:UnitPriceLevel.Low}">
+                
+                <Setter Property="Foreground" Value="Green" />
+                <Setter Property="FontSize" Value="18" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding UnitPriceLevel}" 
+                         Value="{x:Static m:UnitPriceLevel.High}">
+                <Setter Property="Foreground" Value="Red" />
+                <Setter Property="FontSize" Value="18" />
+            </DataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding UnitPriceLevel}" Value="Normal" />
+                    <Condition Binding="{Binding IsRemoved}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Background" Value="Yellow" />
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <DataTemplate x:Key="ProductTemplate" DataType="{x:Type m:Product}">
         <StackPanel Orientation="Horizontal">
-
             <Ellipse Width="30" Height="30" Fill="{Binding Color}" Stroke="Black" StrokeThickness="1" />
-            <TextBlock VerticalAlignment="Center" Width="200" Text="{Binding Name}" />
-            <TextBlock VerticalAlignment="Center" Text="{Binding UnitPrice}" />
+            <TextBlock Style="{StaticResource TextBlockStyle}"  Text="{Binding Name}" />
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding UnitPrice}" />
+            <CheckBox IsChecked="{Binding IsRemoved}" />
         </StackPanel>
     </DataTemplate>
     

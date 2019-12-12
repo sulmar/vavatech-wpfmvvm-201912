@@ -14,6 +14,7 @@ namespace Vavatech.Shop.FakeServices
             RuleFor(p => p.UnitPrice, f => f.Finance.Amount(10, 1000));
             Ignore(p => p.IsSelected);
             Ignore(p => p.Photo);
+            RuleFor(p => p.IsRemoved, f => f.Random.Bool(0.8f));
         }
     }
 }

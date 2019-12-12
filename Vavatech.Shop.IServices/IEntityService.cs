@@ -8,4 +8,5 @@ namespace Vavatech.Shop.IServices
         IEnumerable<TEntity> Get();
         TEntity Get(int id);
     }
+
 }

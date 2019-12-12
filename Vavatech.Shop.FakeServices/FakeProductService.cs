@@ -3,6 +3,7 @@ using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 using System.Linq;
 using Bogus;
+using System.Dynamic;
 
 namespace Vavatech.Shop.FakeServices
 {
@@ -12,11 +13,28 @@ namespace Vavatech.Shop.FakeServices
         {
         }
 
-        public IEnumerable<Product> Get(decimal from, decimal to)
+        public IEnumerable<Product> Get(ProductSearchCriteria criteria)
         {
-            return entities
-                .Where(e => e.UnitPrice >= from && e.UnitPrice <= to)
-                .ToList();
+            IQueryable<Product> query = entities.AsQueryable();
+
+            if (criteria.FromUnitPrice.HasValue)
+            {
+                query = query.Where(p => p.UnitPrice >= criteria.FromUnitPrice);
+            }
+
+            if (criteria.ToUnitPrice.HasValue)
+            {
+                query = query.Where(p => p.UnitPrice <= criteria.ToUnitPrice);
+            }
+            
+            if (!string.IsNullOrEmpty(criteria.Name))
+            {
+                query = query.Where(p => p.Name.Contains(criteria.Name));
+            }
+
+            return query.ToList();
+
+
         }
     }
 }
