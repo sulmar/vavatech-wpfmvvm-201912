@@ -53,6 +53,9 @@ namespace Vavatech.Shop.WpfClient
             containerBuilder
                 .RegisterType<ProductViewModel>();
 
+            containerBuilder
+                .RegisterType<FormViewModel>();
+
             container = containerBuilder.Build();
         }
 
@@ -64,6 +67,7 @@ namespace Vavatech.Shop.WpfClient
 
         public ProductViewModel ProductViewModel =>
             container.Resolve<ProductViewModel>();
-            
-            }
+
+        public FormViewModel FormViewModel => container.Resolve<FormViewModel>();
+    }
 }

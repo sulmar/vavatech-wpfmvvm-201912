@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
 
@@ -8,9 +10,29 @@ namespace Vavatech.Shop.ViewModels
 
     public class CustomersViewModel : BaseViewModel
     {
-        public IEnumerable<Customer> Customers { get; set; }
+        //public bool IsLoading
+        //{
+        //    get => isLoading; set
+        //    {
+        //        isLoading = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        public IEnumerable<Customer> Customers
+        {
+            get => customers;
+            set
+            {
+                customers = value;
+                OnPropertyChanged();
+            }
+        }
 
         private Customer _SelectedCustomer;
+        private IEnumerable<Customer> customers;
+       // private bool isLoading;
+
         public Customer SelectedCustomer
         {
             get => _SelectedCustomer;
@@ -36,7 +58,7 @@ namespace Vavatech.Shop.ViewModels
 
         private readonly ICustomerService customerService;
 
-      
+
 
         public CustomersViewModel(ICustomerService customerService)
         {
@@ -44,13 +66,17 @@ namespace Vavatech.Shop.ViewModels
 
             SendCommand = new RelayCommand(Send, CanSend);
 
-            Load();
+           // Load();
         }
 
-        private void Load()
-        {
-            Customers = customerService.Get();
-        }
+
+
+        //public async void Load()
+        //{
+        //    IsLoading = true;
+        //    Customers = await customerService.GetAsync();
+        //    IsLoading = false;
+        //}
 
         public RelayCommand SendCommand { get; private set; }
 
@@ -63,11 +89,13 @@ namespace Vavatech.Shop.ViewModels
 
         public bool CanSend()
         {
-            return IsSelectedCustomer 
+            return IsSelectedCustomer
                 && !string.IsNullOrEmpty(SelectedCustomer.Email);
         }
 
-       
-
+        public override async Task Get()
+        {
+            Customers = await customerService.GetAsync();
+        }
     }
 }

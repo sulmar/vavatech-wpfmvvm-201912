@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace Vavatech.Shop.WpfClient.Views
 {
     /// <summary>
-    /// Interaction logic for CustomersView.xaml
+    /// Interaction logic for FormView.xaml
     /// </summary>
-    public partial class CustomersView : Page
+    public partial class FormView : Page
     {
-        public CustomersView()
+        public FormView()
         {
             InitializeComponent();
-
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

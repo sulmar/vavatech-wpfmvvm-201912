@@ -4,6 +4,8 @@ using Vavatech.Shop.Models;
 using System.Linq;
 using Bogus;
 using System.Dynamic;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Vavatech.Shop.FakeServices
 {
@@ -35,6 +37,14 @@ namespace Vavatech.Shop.FakeServices
             return query.ToList();
 
 
+        }
+
+        public Task<IEnumerable<Product>> GetAsync(ProductSearchCriteria criteria)
+        {
+
+            // return Task.FromResult(Get(criteria));
+
+            return Task.Run(() => Get(criteria));
         }
     }
 }

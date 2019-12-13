@@ -51,4 +51,20 @@
         </StackPanel>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type m:TextFieldTemplate}">
+        <StackPanel Orientation="Horizontal">
+            <Label Width="100" Content="{Binding Name}" />
+            <TextBox Width="200" Text="{Binding Value}" />
+        </StackPanel>
+        
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type m:DateFieldTemplate}" >
+        <StackPanel Orientation="Horizontal">
+            <Label Width="100" Content="{Binding Name}" />
+            <DatePicker Width="200" SelectedDate="{Binding Value}" />
+        </StackPanel>
+        
+    </DataTemplate>
+    
 </ResourceDictionary>

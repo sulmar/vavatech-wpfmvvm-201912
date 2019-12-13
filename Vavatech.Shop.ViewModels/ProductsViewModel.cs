@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Vavatech.Shop.IServices;
 using Vavatech.Shop.Models;
@@ -42,7 +43,7 @@ namespace Vavatech.Shop.ViewModels
 
             Criteria.PropertyChanged += Criteria_PropertyChanged;
 
-            Load();
+          //  Load();
         }
 
         private void Criteria_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -55,10 +56,7 @@ namespace Vavatech.Shop.ViewModels
             }
         }
 
-        private void Load()
-        {
-        }
-
+      
 
         private void ShowSelectedProduct()
         {
@@ -75,5 +73,11 @@ namespace Vavatech.Shop.ViewModels
         }
 
         private bool CanSearch() => Criteria.IsValid;
+
+        public override async Task Get()
+        {
+            Products = await productService.GetAsync(Criteria);
+
+        }
     }
 }

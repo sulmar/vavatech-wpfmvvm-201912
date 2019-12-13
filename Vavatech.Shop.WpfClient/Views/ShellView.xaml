@@ -14,6 +14,8 @@
         <vm:ShellViewModel />
     </Window.DataContext>-->
 
+
+
     <Window.Resources>
 
      
@@ -67,14 +69,58 @@
         </DockPanel>-->
 
         <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Views">
+                
+                    <MenuItem Header="Show customers" 
+                              Command="{Binding ShowViewCommand}" 
+                              CommandParameter="Customers" />
+                
+                    <MenuItem Header="Show products"
+                              Command="{Binding ShowViewCommand}"
+                              CommandParameter="Products"
+                              />
+                </MenuItem>
+
+                <MenuItem Header="Items" 
+                          ItemsSource="{Binding Items}"
+                          
+                          />
+
+            </Menu>
+            
             <DockPanel DockPanel.Dock="Top">
                 <Button Command="{Binding ShowViewCommand}" 
                         CommandParameter="Customers">Customers</Button>
                 <Button Command="{Binding ShowViewCommand}"
                         CommandParameter="Products"
                         Style="{StaticResource MySpecialButtonStyle}" >Products</Button>
+
+                <Button Command="{Binding ShowViewCommand}"
+                        CommandParameter="Form">Show Form</Button>
                 <Button>Employees</Button>
-                <Button HorizontalAlignment="Right">Logo</Button>
+
+                <Button HorizontalAlignment="Right" Content="Logo"
+                        RenderTransformOrigin="0.5, 0.5"
+                        >
+
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        To="360"
+                                        Duration="0:0:5" 
+                                        Storyboard.TargetProperty="Width" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                    
+                    <Button.RenderTransform >
+                        <RotateTransform Angle="90" />
+                    </Button.RenderTransform>
+                </Button>
             </DockPanel>
 
             <Frame Name="ContentFrame" 
