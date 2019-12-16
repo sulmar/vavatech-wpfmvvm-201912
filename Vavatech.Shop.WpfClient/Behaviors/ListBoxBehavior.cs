@@ -16,7 +16,7 @@ namespace Vavatech.Shop.WpfClient.Behaviors
     public class ListBoxBehavior : Behavior<ListBox>
     {
 
-        // snippet: dropdp
+        // snippet: propdp
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
